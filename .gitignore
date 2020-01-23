@@ -86,3 +86,7 @@ gradle-app.setting
 
 ### Gradle Patch ###
 **/build/
+
+### Project ###
+src/main/gen
+idea-flex.skeleton
