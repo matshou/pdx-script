@@ -13,6 +13,8 @@
         <fileType name="Paradox Script" implementationClass="io.yooksi.pdxs.ScriptFileType"
                   fieldName="INSTANCE"
                   language="PdxScript" extensions="pdxs"/>
+        <lang.parserDefinition language="PdxScript"
+                               implementationClass="io.yooksi.pdxs.define.ScriptParserDefinition"/>
     </extensions>
 
     <actions>
