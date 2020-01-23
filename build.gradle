@@ -23,11 +23,61 @@ grammarKit {
     // tag or short commit hash of Grammar-Kit to use (see link below). Default is 2019.1.1
     grammarKitRelease = '2019.3'
 }
+
+task generateScriptLexer(type: GenerateLexer) {
+    group = 'grammar'
+    description = 'Run JFlex Generator'
+
+    source = gradle.ext.javaSrcSet + 'grammar/Script.flex'
+
+    // target directory for lexer
+    targetDir = gradle.ext.genSrcSet
+
+    // target classname, target file will be targetDir/targetClass.java
+    targetClass = "ScriptLexer"
+
+    // optional, path to the task-specific skeleton file. Default: none
+    skeleton = 'idea-flex.skeleton'
+
+    // if set, plugin will remove a lexer output file before generating new one. Default: false
+    purgeOldFiles = true
+}
+
+task generateParserCode(type: GenerateParser) {
+    group = 'grammar'
+    description = 'Generate Parser Code'
+
+    // source bnf file
+    source = 'src/main/java/io/yooksi/pdxs/grammar/Script.bnf'
+
+    // optional, task-specific root for the generated files. Default: none
+    targetRoot = 'src/main/gen/'
+
+    // path to a parser file, relative to the targetRoot
+    pathToParser = 'parser/ScriptParser'
+
+    // path to a directory with generated psi files, relative to the targetRoot
+    pathToPsiRoot = 'psi'
+
+    // if set, plugin will remove a parser output file and psi output directory before generating new ones. Default: false
+    purgeOldFiles = true
+
+    doLast {
+        println (gradle.ext.genSrcSet)
+    }
+}
+
+task generateGrammar {
+    group = 'grammar'
+    description = 'Run Parser and Lexer code'
+    dependsOn = ['generateParserCode', 'generateScriptLexer']
+}
+
 sourceSets {
-    main.java.srcDir "src/main/gen/"
+    main.java.srcDir project.genSrcSet
 }
 idea.module {
-    generatedSourceDirs += file('src/main/gen')
+    generatedSourceDirs += file(project.genSrcSet)
 }
 
 dependencies {
