@@ -1,0 +1,14 @@
+{
+  parserClass="io.yooksi.pdxs.parser.ScriptParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Script"
+  psiImplClassSuffix="Impl"
+  psiPackage="io.yooksi.pdxs.psi"
+  psiImplPackage="io.yooksi.pdxs.psi.impl"
+
+  elementTypeHolderClass="io.yooksi.pdxs.psi.ScriptTypes"
+  elementTypeClass="io.yooksi.pdxs.psi.ScriptElementType"
+  tokenTypeClass="io.yooksi.pdxs.psi.ScriptTokenType"
+}
