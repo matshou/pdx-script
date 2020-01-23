@@ -1,6 +1,7 @@
 package io.yooksi.pdxs.lexer;
 
 import com.intellij.lexer.FlexAdapter;
+import io.yooksi.pdxs.ScriptLexer;
 
 public class ScriptLexerAdapter extends FlexAdapter {
 

@@ -1,4 +1,6 @@
+package io.yooksi.pdxs;
 
+import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import io.yooksi.pdxs.psi.ScriptTypes;
@@ -6,6 +8,7 @@ import io.yooksi.pdxs.psi.ScriptTypes;
 %%
 
 %class ScriptLexer
+%public
 %implements FlexLexer
 %unicode
 %function advance
