@@ -5,6 +5,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import io.yooksi.pdxs.psi.ScriptTypes;
 
+@SuppressWarnings("ALL")
 %%
 
 %class ScriptLexer
