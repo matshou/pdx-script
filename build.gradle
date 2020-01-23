@@ -1,7 +1,10 @@
+import org.jetbrains.grammarkit.tasks.*
+
 plugins {
     id 'idea'
     id 'java'
     id 'org.jetbrains.intellij' version '0.4.15'
+    id "org.jetbrains.grammarkit" version "2020.1"
 }
 
 group 'io.yooksi'
@@ -13,6 +16,13 @@ repositories {
     mavenCentral()
 }
 
+grammarKit {
+    // version of IntelliJ patched JFlex (see bintray link below), Default is 1.7.0-1
+    jflexRelease = '1.7.0-2'
+
+    // tag or short commit hash of Grammar-Kit to use (see link below). Default is 2019.1.1
+    grammarKitRelease = '2019.3'
+}
 sourceSets {
     main.java.srcDir "src/main/gen/"
 }
