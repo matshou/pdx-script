@@ -1,0 +1,96 @@
+import org.jetbrains.grammarkit.tasks.*
+
+plugins {
+    id 'idea'
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.15'
+    id "org.jetbrains.grammarkit" version "2020.1"
+}
+
+group 'io.yooksi'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+grammarKit {
+    // version of IntelliJ patched JFlex (see bintray link below), Default is 1.7.0-1
+    jflexRelease = '1.7.0-2'
+
+    // tag or short commit hash of Grammar-Kit to use (see link below). Default is 2019.1.1
+    grammarKitRelease = '2019.3'
+}
+
+task generateScriptLexer(type: GenerateLexer) {
+    group = 'grammar'
+    description = 'Run JFlex Generator'
+
+    source = gradle.ext.javaSrcSet + 'grammar/Script.flex'
+
+    // target directory for lexer
+    targetDir = gradle.ext.genSrcSet
+
+    // target classname, target file will be targetDir/targetClass.java
+    targetClass = "ScriptLexer"
+
+    // optional, path to the task-specific skeleton file. Default: none
+    skeleton = 'idea-flex.skeleton'
+
+    // if set, plugin will remove a lexer output file before generating new one. Default: false
+    purgeOldFiles = true
+}
+
+task generateParserCode(type: GenerateParser) {
+    group = 'grammar'
+    description = 'Generate Parser Code'
+
+    // source bnf file
+    source = 'src/main/java/io/yooksi/pdxs/grammar/Script.bnf'
+
+    // optional, task-specific root for the generated files. Default: none
+    targetRoot = 'src/main/gen/'
+
+    // path to a parser file, relative to the targetRoot
+    pathToParser = 'parser/ScriptParser'
+
+    // path to a directory with generated psi files, relative to the targetRoot
+    pathToPsiRoot = 'psi'
+
+    // if set, plugin will remove a parser output file and psi output directory before generating new ones. Default: false
+    purgeOldFiles = true
+}
+
+task generateGrammar {
+    group = 'grammar'
+    description = 'Run Parser and Lexer code'
+    dependsOn = ['generateParserCode', 'generateScriptLexer']
+}
+
+sourceSets {
+    main.java.srcDir project.genSrcSet
+}
+idea.module {
+    generatedSourceDirs += file(project.genSrcSet)
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+test {
+    systemProperty "idea.home.path", "../../intellij"
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version '2019.3.2'
+}
+patchPluginXml {
+    changeNotes "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+            "Vivamus nec erat eget enim ornare rutrum. Fusce nec ipsum pellentesque, " +
+            "imperdiet lorem non, venenatis magna. Donec sodales augue at enim dignissim elementum. " +
+            "Nam eu elementum arcu. Sed ullamcorper eget quam maximus aliquam. "
+}

@@ -29,11 +29,11 @@
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
-# .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
-# *.iml
-# *.ipr
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
+*.iml
+*.ipr
 
 # File-based project format
 *.iws
@@ -43,6 +43,9 @@ out/
 
 # Rich Presence
 .idea/discord.xml
+
+# Repository Config
+.idea/jarRepositories.xml
 
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
@@ -86,3 +89,7 @@ gradle-app.setting
 
 ### Gradle Patch ###
 **/build/
+
+### Project ###
+src/main/gen
+idea-flex.skeleton

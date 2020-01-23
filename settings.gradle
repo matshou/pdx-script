@@ -1,0 +1,12 @@
+rootProject.name = 'PdxScript'
+
+Properties props = new Properties()
+props.load(new FileInputStream("$rootDir/gradle.properties"))
+props.each { prop ->
+    ext.set(prop.key, prop.value)
+}
+gradle.ext.javaSrcSet = props.getProperty('javaSrcSet')
+        .concat(props.getProperty('packagePath'))
+
+gradle.ext.genSrcSet = props.getProperty('genSrcSet')
+        .concat(props.getProperty('packagePath'))
