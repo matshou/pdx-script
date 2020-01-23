@@ -12,3 +12,9 @@
   elementTypeClass="io.yooksi.pdxs.psi.ScriptElementType"
   tokenTypeClass="io.yooksi.pdxs.psi.ScriptTokenType"
 }
+
+scriptFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY
