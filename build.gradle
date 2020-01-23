@@ -1,0 +1,40 @@
+plugins {
+    id 'idea'
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.15'
+}
+
+group 'io.yooksi'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main.java.srcDir "src/main/gen/"
+}
+idea.module {
+    generatedSourceDirs += file('src/main/gen')
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+test {
+    systemProperty "idea.home.path", "../../intellij"
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version '2019.3.2'
+}
+patchPluginXml {
+    changeNotes "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+            "Vivamus nec erat eget enim ornare rutrum. Fusce nec ipsum pellentesque, " +
+            "imperdiet lorem non, venenatis magna. Donec sodales augue at enim dignissim elementum. " +
+            "Nam eu elementum arcu. Sed ullamcorper eget quam maximus aliquam. "
+}
