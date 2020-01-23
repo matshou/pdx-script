@@ -21,7 +21,7 @@ public class ScriptFileType extends LanguageFileType {
 	@NotNull
 	@Override
 	public String getDescription() {
-		return "Paradox Script";
+		return getName();
 	}
 
 	@NotNull
