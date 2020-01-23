@@ -1,0 +1,22 @@
+<idea-plugin>
+    <id>io.yooksi.pdxs</id>
+    <name>Paradox Script</name>
+    <vendor email="yooksi@zoho.com" url="https://github.com/yooksi">Matthew Cain</vendor>
+
+    <description><![CDATA[Scripting language used by Paradox Interactive games.]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="Paradox Script" implementationClass="io.yooksi.pdxs.ScriptFileType"
+                  fieldName="INSTANCE"
+                  language="PdxScript" extensions="pdxs"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+</idea-plugin>
